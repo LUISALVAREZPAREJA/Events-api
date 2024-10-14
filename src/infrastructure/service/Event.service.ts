@@ -1,10 +1,10 @@
 import { NotFoundError } from "../../Domain/Errors/NotFoundError";
 import { IfcEvent, IfcEventCreate } from "../../Domain/interfaces/Event.interfaces";
-import { IEventServices } from "../../Domain/Services/IEvent.services";
+import { IfcEventServices } from "../../Domain/Services/IEvent.services";
 import { IfcGenerateIdService } from "../interface/GenerateId.interface";
 import Event from '../models/event.model';
 
-export class EventService implements IEventServices{
+export class EventService implements IfcEventServices{
   private readonly event = Event
 
   constructor(private readonly getIdSrv: IfcGenerateIdService) {

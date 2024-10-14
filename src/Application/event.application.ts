@@ -3,12 +3,12 @@ import { NotCreatedError } from "../Domain/Errors/NotCreatedError";
 import { NotFoundError } from "../Domain/Errors/NotFoundError";
 import { NotUpdatedError } from "../Domain/Errors/NotUpdatedError";
 import { IfcEvent,IfcEventCreate } from "../Domain/interfaces/Event.interfaces";
-import { IEventServices } from "../Domain/Services/IEvent.services";
+import { IfcEventServices } from "../Domain/Services/IEvent.services";
 
 export class Event {
 
     constructor(
-        private readonly EventServ:IEventServices
+        private readonly EventServ:IfcEventServices
     ){}
 
     async CreateEvent(event:IfcEventCreate){
