@@ -12,6 +12,6 @@ app.use("/events", eventRouter);
 
 app.listen(PORT, async ()=>{
     console.log("Server running at port", Parameters.DATABASE_PORT);
-    await initDatabase(Parameters.MONGODB_URI);
+    await initDatabase(Parameters.DATABASE_URL);
 })
 

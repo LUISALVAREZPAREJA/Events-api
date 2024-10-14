@@ -1,4 +1,4 @@
-export interface IEvent {
+export interface IfcEvent {
     id: string;
     title: string;
     description: string;
@@ -7,5 +7,5 @@ export interface IEvent {
     organizer:string;
 }
 
-export interface IEventCreate extends Omit<IEvent, "id"> {}
+export interface IfcEventCreate extends Omit<IfcEvent, "id"> {}
 // export interface IEventFound extends Partial<IEvent> {}
