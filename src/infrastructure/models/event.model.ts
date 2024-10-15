@@ -1,8 +1,8 @@
 
 import mongoose from "mongoose";
-import { IEvent } from "../../Domain/interfaces/Event.interfaces";
+import { IfcEvent } from "../../Domain/interfaces/Event.interfaces";
 
-const eventSchema = new mongoose.Schema<IEvent>({
+const eventSchema = new mongoose.Schema<IfcEvent>({
   id : {
     type : String,
     required : true

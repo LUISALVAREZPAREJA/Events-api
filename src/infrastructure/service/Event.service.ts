@@ -1,18 +1,18 @@
 import { NotFoundError } from "../../Domain/Errors/NotFoundError";
-import { IEvent, IEventCreate } from "../../Domain/interfaces/Event.interfaces";
-import { IEventServices } from "../../Domain/Services/IEvent.services";
-import { IGenerateIdService } from "../interface/IGenerateId.interface";
+import { IfcEvent, IfcEventCreate } from "../../Domain/interfaces/Event.interfaces";
+import { IfcEventServices } from "../../Domain/Services/IEvent.services";
+import { IfcGenerateIdService } from "../interface/GenerateId.interface";
 import Event from '../models/event.model';
 
-export class EventService implements IEventServices{
+export class EventService implements IfcEventServices{
   private readonly event = Event
 
-  constructor(private readonly getIdSrv: IGenerateIdService) {
+  constructor(private readonly getIdSrv: IfcGenerateIdService) {
         
   }
 
-  async create(event : IEventCreate) : Promise<IEvent>{
-    const newEvent : IEvent = {
+  async create(event : IfcEventCreate) : Promise<IfcEvent>{
+    const newEvent : IfcEvent = {
       id : this.getIdSrv.get(),
       ...event
     }
@@ -20,24 +20,24 @@ export class EventService implements IEventServices{
     return newEvent;
   }
 
-  async getAll() : Promise<IEvent[]>{
+  async getAll() : Promise<IfcEvent[]>{
     const events = await this.event.find({});
     return events;
   }
 
-  async getById( id : IEvent["id"] ) : Promise<IEvent | null> {
+  async getById( id : IfcEvent["id"] ) : Promise<IfcEvent | null> {
     const event = await this.event.findOne({id});
     if(!event)
       throw new NotFoundError();
     return event;
   }
 
-  async update( id: IEvent["id"], event : Partial<IEvent> ) : Promise<IEvent | null>{
+  async update( id: IfcEvent["id"], event : Partial<IfcEvent> ) : Promise<IfcEvent | null>{
     const eventUpdated = await this.event.findOneAndUpdate({id}, event, {returnDocument:'after'});
     return eventUpdated;
   }
 
-  async delete(id: IEvent["id"]) : Promise<IEvent | null> {
+  async delete(id: IfcEvent["id"]) : Promise<IfcEvent | null> {
     const eventDeleted  = await this.event.findOneAndDelete({id}, {returnDocument:'after'});
     return eventDeleted;
   }
@@ -46,6 +46,3 @@ export class EventService implements IEventServices{
   
   
 }
-// delete: (id: IEvent["id"]) => Promise<Boolean>;
-// update: (id: IEvent["id"], Event: Partial<IEvent>) => Promise<IEvent>;
-// getById: (id: IEvent["id"]) => Promise<IEvent>;

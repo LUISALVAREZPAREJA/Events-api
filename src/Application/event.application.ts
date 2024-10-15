@@ -2,16 +2,16 @@ import { InternalError } from "../Domain/Errors/InternalError";
 import { NotCreatedError } from "../Domain/Errors/NotCreatedError";
 import { NotFoundError } from "../Domain/Errors/NotFoundError";
 import { NotUpdatedError } from "../Domain/Errors/NotUpdatedError";
-import { IEvent,IEventCreate } from "../Domain/interfaces/Event.interfaces";
-import { IEventServices } from "../Domain/Services/IEvent.services";
+import { IfcEvent,IfcEventCreate } from "../Domain/interfaces/Event.interfaces";
+import { IfcEventServices } from "../Domain/Services/IEvent.services";
 
 export class Event {
 
     constructor(
-        private readonly EventServ:IEventServices
+        private readonly EventServ:IfcEventServices
     ){}
 
-    async CreateNewEvent(event:IEventCreate){
+    async CreateEvent(event:IfcEventCreate){
         try {
             const newEvent = await this.EventServ.create(event)
             return newEvent
@@ -20,7 +20,7 @@ export class Event {
         }
     }
 
-    async getAllEvent(){
+    async getAllEvents(){
         try {
             const allEvent = await this.EventServ.getAll()
             return allEvent
@@ -28,7 +28,7 @@ export class Event {
             throw new NotFoundError()
         }
     }
-    async getByIdEvent(id:string):Promise<IEvent | null>{
+    async getEventById(id:string):Promise<IfcEvent | null>{
         try {
             const getEventById = await this.EventServ.getById(id);
             return getEventById
@@ -36,9 +36,9 @@ export class Event {
             throw new NotFoundError();
         }
     }
-    async updateEvent(id:string,event:Partial<IEvent>):Promise<IEvent | null>{
+    async updateEvent(id:string,event:Partial<IfcEvent>):Promise<IfcEvent | null>{
         try {
-            const Event = await this.getByIdEvent(id) 
+            const Event = await this.getEventById(id) 
             if(!Event) throw new NotFoundError()
             
            const eventUpdated = await this.EventServ.update(id,event)
@@ -47,9 +47,9 @@ export class Event {
             throw new NotUpdatedError()
         }
     }
-    async DeleteEvent(id:string):Promise<IEvent | null>{
+    async DeleteEvent(id:string):Promise<IfcEvent | null>{
         try {
-            const Event = await this.getByIdEvent(id) 
+            const Event = await this.getEventById(id) 
             if(!Event) throw new NotFoundError()
             
            const eventDeleted = await this.EventServ.delete(id)
